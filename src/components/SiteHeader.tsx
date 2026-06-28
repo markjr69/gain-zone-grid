@@ -1,10 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X, ShoppingBag } from "lucide-react";
+import { useCart } from "@/lib/cart";
 
 const nav = [
   { to: "/weights", label: "Weights" },
-  { to: "/apparel", label: "Apparel" },
+  { to: "/apparel", label: "Gym wear" },
   { to: "/accessories", label: "Accessories" },
   { to: "/programs", label: "Programs" },
   { to: "/wholesale", label: "Wholesale" },
@@ -13,6 +14,7 @@ const nav = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const { count, setOpen: setCartOpen } = useCart();
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
