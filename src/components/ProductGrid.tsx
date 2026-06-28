@@ -1,4 +1,4 @@
-export type Product = {
+import { useCart } from "@/lib/cart";
   name: string;
   price: string;
   tag?: string;

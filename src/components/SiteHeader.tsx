@@ -35,8 +35,13 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <button className="hidden items-center gap-2 border border-border px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors hover:border-primary hover:text-primary lg:flex">
-            <ShoppingBag className="h-4 w-4" /> Cart (0)
+          <button
+            onClick={() => setCartOpen(true)}
+            className="relative flex items-center gap-2 border border-border px-3 py-2 text-xs font-bold uppercase tracking-wider transition-colors hover:border-primary hover:text-primary lg:px-4"
+          >
+            <ShoppingBag className="h-4 w-4" />
+            <span className="hidden lg:inline">Cart</span>
+            <span className="grid h-5 min-w-5 place-items-center bg-primary px-1 font-mono text-[10px] text-primary-foreground">{count}</span>
           </button>
           <button onClick={() => setOpen(!open)} className="lg:hidden" aria-label="Menu">
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
