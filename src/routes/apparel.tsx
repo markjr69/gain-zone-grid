@@ -5,10 +5,10 @@ import img from "@/assets/cat-apparel.jpg";
 export const Route = createFileRoute("/apparel")({
   head: () => ({
     meta: [
-      { title: "Apparel & Merch — Hoodies, Tees, Bags | GymTitan" },
+      { title: "Gym wear & Merch — Hoodies, Tees, Bags | GymTitan" },
       { name: "description", content: "Performance hoodies, oversized tees, shorts, workout bags and merch. Built to train, designed to live in." },
-      { property: "og:title", content: "Apparel — GymTitan" },
-      { property: "og:description", content: "Performance apparel, merch and workout bags." },
+      { property: "og:title", content: "Gym wear — GymTitan" },
+      { property: "og:description", content: "Performance gym wear, merch and workout bags." },
       { property: "og:url", content: "/apparel" },
     ],
     links: [{ rel: "canonical", href: "/apparel" }],
@@ -32,7 +32,7 @@ function ApparelPage() {
   return (
     <>
       <CategoryHero
-        eyebrow="/ category 02 — apparel"
+        eyebrow="/ category 02 — gym wear"
         title="Wear the work."
         blurb="Heavyweight fabrics, athletic cuts, zero filler. Designed for the gym, lived in everywhere else."
         image={img}
