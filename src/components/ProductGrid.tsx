@@ -1,3 +1,5 @@
+import { useCart } from "@/lib/cart";
+
 export type Product = {
   name: string;
   price: string;
@@ -6,6 +8,7 @@ export type Product = {
 };
 
 export function ProductGrid({ products }: { products: Product[] }) {
+  const { add } = useCart();
   return (
     <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
       {products.map((p) => (
@@ -27,7 +30,10 @@ export function ProductGrid({ products }: { products: Product[] }) {
             </div>
             <span className="font-mono text-lg text-primary">{p.price}</span>
           </div>
-          <button className="mt-4 border border-border py-2 text-xs font-bold uppercase tracking-widest transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground">
+          <button
+            onClick={() => add({ name: p.name, price: p.price })}
+            className="mt-4 border border-border py-2 text-xs font-bold uppercase tracking-widest transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+          >
             Add to cart
           </button>
         </article>

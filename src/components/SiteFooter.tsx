@@ -25,7 +25,7 @@ export function SiteFooter() {
           <h4 className="font-display text-sm tracking-widest text-primary">Shop</h4>
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
             <li><Link to="/weights" className="hover:text-foreground">Weights</Link></li>
-            <li><Link to="/apparel" className="hover:text-foreground">Apparel</Link></li>
+            <li><Link to="/apparel" className="hover:text-foreground">Gym wear</Link></li>
             <li><Link to="/accessories" className="hover:text-foreground">Accessories</Link></li>
           </ul>
         </div>

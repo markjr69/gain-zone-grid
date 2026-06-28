@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
 
 const categories = [
   { to: "/weights", title: "Weights", count: "Dumbbells • Barbells • Plates", img: catWeights, icon: Dumbbell },
-  { to: "/apparel", title: "Apparel", count: "Hoodies • Tees • Shorts • Merch", img: catApparel, icon: Shirt },
+  { to: "/apparel", title: "Gym wear", count: "Hoodies • Tees • Shorts • Merch", img: catApparel, icon: Shirt },
   { to: "/accessories", title: "Accessories", count: "Watches • Ropes • Mats • Bottles", img: catAccessories, icon: Watch },
   { to: "/programs", title: "Programs", count: "Training • Diet • 1:1 Coaching", img: catPrograms, icon: BookOpen },
   { to: "/wholesale", title: "Wholesale", count: "Racks • Machines • Bulk Orders", img: catWholesale, icon: Truck },
@@ -44,8 +44,7 @@ function Index() {
               <Zap className="h-3 w-3" /> New drop · Titan series
             </div>
             <h1 className="mt-6 font-display text-6xl leading-[0.9] tracking-tight sm:text-7xl md:text-8xl lg:text-[9rem]">
-              Iron <span className="text-primary">sharpens</span><br/>
-              <span className="text-stroke">iron.</span>
+              <span className="text-white">Built</span> <span className="text-primary">Different</span>
             </h1>
             <p className="mt-8 max-w-xl text-lg text-muted-foreground">
               GymTitan ships the gear, the wearables, and the programs that turn ordinary days into PR days. Worldwide. No excuses.
@@ -78,7 +77,7 @@ function Index() {
       <section className="overflow-hidden border-y border-border bg-primary py-4 text-primary-foreground">
         <div className="marquee flex w-max items-center gap-12 whitespace-nowrap font-display text-2xl tracking-wider">
           {Array.from({ length: 2 }).flatMap((_, i) =>
-            ["Free shipping over $99", "★", "30-day returns", "★", "Worldwide delivery", "★", "Wholesale inquiries open", "★", "New drops weekly", "★"].map((t, j) => (
+            ["Countrywide Delivery", "★", "Pay via Mobile Money or Cash", "★", "Wholesale Inquiries Open", "★", "Brand New High Quality Products", "★", "New Drops Weekly", "★"].map((t, j) => (
               <span key={`${i}-${j}`}>{t}</span>
             ))
           )}
@@ -136,8 +135,8 @@ function Index() {
             <div className="grid grid-cols-2 gap-4 pt-4">
               {[
                 { icon: ShieldCheck, label: "Lifetime warranty on iron" },
-                { icon: Globe, label: "60+ countries shipped" },
-                { icon: Truck, label: "Free over $99" },
+                { icon: Globe, label: "1K+ Orders Delivered" },
+                { icon: Truck, label: "Free Delivery over UGX 500K" },
                 { icon: Package, label: "30-day returns" },
               ].map((f) => (
                 <div key={f.label} className="flex items-center gap-3 border border-border bg-background p-4">
@@ -155,8 +154,8 @@ function Index() {
         <div className="relative overflow-hidden border border-border bg-gradient-to-br from-primary to-[oklch(0.78_0.2_70)] p-10 text-primary-foreground md:p-20">
           <div className="relative z-10 max-w-2xl">
             <p className="font-mono text-xs uppercase tracking-[0.3em]">/ wholesale</p>
-            <h2 className="mt-3 font-display text-5xl leading-[0.95] tracking-tight md:text-7xl">Outfit your gym. <br/>By the pallet.</h2>
-            <p className="mt-6 max-w-lg text-base opacity-80">Racks, machines, plates, dumbbells — direct from the factory floor. Bulk discounts, freight worldwide, no middlemen.</p>
+            <h2 className="mt-3 font-display text-5xl leading-[0.95] tracking-tight md:text-7xl">Starting a new gym? <br/>50% payment installment</h2>
+            <p className="mt-6 max-w-lg text-base opacity-80">Racks, machines, plates, dumbbells — direct from the factory. Bulk discounts, freight worldwide, no middlemen.</p>
             <Link to="/wholesale" className="mt-8 inline-flex items-center gap-2 bg-background px-8 py-4 text-xs font-bold uppercase tracking-widest text-foreground hover:bg-foreground hover:text-background">
               Request a quote <ArrowRight className="h-4 w-4" />
             </Link>

@@ -31,8 +31,8 @@ function WholesalePage() {
     <>
       <CategoryHero
         eyebrow="/ category 05 — wholesale"
-        title="Outfit a gym. Or a chain."
-        blurb="Big equipment, bigger margins. We ship freight worldwide, direct from the factory floor."
+        title="Starting a new gym? 50% payment installment"
+        blurb="Racks, machines, plates, dumbbells — direct from the factory. Bulk discounts, freight worldwide, no middlemen."
         image={img}
       />
 
