@@ -1,10 +1,11 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
 import { X, Minus, Plus, ShoppingBag } from "lucide-react";
+import { formatShs } from "./format";
 
 export type CartItem = {
-  id: string;
-  name: string;
-  price: number;
+  id: string; // compound: slug + variant
+  name: string; // display name including variant
+  price: number; // unit price in Shs
   qty: number;
 };
 
@@ -12,7 +13,7 @@ type CartCtx = {
   items: CartItem[];
   count: number;
   subtotal: number;
-  add: (item: { name: string; price: string | number }) => void;
+  add: (item: { id: string; name: string; price: number }) => void;
   remove: (id: string) => void;
   setQty: (id: string, qty: number) => void;
   clear: () => void;
@@ -22,23 +23,15 @@ type CartCtx = {
 
 const Ctx = createContext<CartCtx | null>(null);
 
-const parsePrice = (p: string | number) => {
-  if (typeof p === "number") return p;
-  const n = parseFloat(p.replace(/[^0-9.]/g, ""));
-  return isNaN(n) ? 0 : n;
-};
-
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [open, setOpen] = useState(false);
 
-  const add: CartCtx["add"] = ({ name, price }) => {
-    const id = name;
-    const value = parsePrice(price);
+  const add: CartCtx["add"] = ({ id, name, price }) => {
     setItems((prev) => {
       const found = prev.find((i) => i.id === id);
       if (found) return prev.map((i) => (i.id === id ? { ...i, qty: i.qty + 1 } : i));
-      return [...prev, { id, name, price: value, qty: 1 }];
+      return [...prev, { id, name, price, qty: 1 }];
     });
     setOpen(true);
   };
@@ -90,7 +83,7 @@ export function CartDrawer() {
                   </div>
                   <div className="flex-1">
                     <div className="font-display text-sm tracking-wider">{i.name}</div>
-                    <div className="mt-1 font-mono text-xs text-primary">${i.price.toFixed(2)}</div>
+                    <div className="mt-1 font-mono text-xs text-primary">{formatShs(i.price)}</div>
                     <div className="mt-2 inline-flex items-center border border-border">
                       <button onClick={() => setQty(i.id, i.qty - 1)} className="p-1.5" aria-label="Decrease">
                         <Minus className="h-3 w-3" />
@@ -102,7 +95,7 @@ export function CartDrawer() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-mono text-sm">${(i.qty * i.price).toFixed(2)}</div>
+                    <div className="font-mono text-sm">{formatShs(i.qty * i.price)}</div>
                     <button onClick={() => remove(i.id)} className="mt-2 text-[10px] uppercase tracking-wider text-muted-foreground hover:text-primary">Remove</button>
                   </div>
                 </li>
@@ -113,7 +106,7 @@ export function CartDrawer() {
         <div className="border-t border-border px-5 py-4">
           <div className="flex items-center justify-between text-sm">
             <span className="uppercase tracking-wider text-muted-foreground">Subtotal</span>
-            <span className="font-mono text-xl text-primary">${subtotal.toFixed(2)}</span>
+            <span className="font-mono text-xl text-primary">{formatShs(subtotal)}</span>
           </div>
           <button
             disabled={items.length === 0}
