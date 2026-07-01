@@ -1,20 +1,20 @@
-import { useCart } from "@/lib/cart";
-
-export type Product = {
-  name: string;
-  price: string;
-  tag?: string;
-  blurb: string;
-};
+import { Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
+import { priceLabel, type Product } from "@/lib/products";
 
 export function ProductGrid({ products }: { products: Product[] }) {
-  const { add } = useCart();
   return (
     <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
       {products.map((p) => (
-        <article key={p.name} className="group relative flex flex-col bg-background p-6 transition-colors hover:bg-[var(--surface)]">
+        <Link
+          key={p.slug}
+          to="/product/$slug"
+          params={{ slug: p.slug }}
+          className="group relative flex flex-col bg-background p-6 transition-colors hover:bg-[var(--surface)]"
+        >
           <div className="relative aspect-square overflow-hidden bg-[var(--surface-2)]">
-            <div className="absolute inset-0 grid place-items-center font-display text-6xl text-border transition-transform group-hover:scale-110">
+            <img src={p.image} alt={p.name} className="h-full w-full object-cover opacity-40 transition-transform group-hover:scale-105" />
+            <div className="absolute inset-0 grid place-items-center font-display text-6xl text-border/80">
               {p.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
             </div>
             {p.tag && (
@@ -28,15 +28,12 @@ export function ProductGrid({ products }: { products: Product[] }) {
               <h3 className="font-display text-xl leading-tight tracking-wider">{p.name}</h3>
               <p className="mt-1 text-xs text-muted-foreground">{p.blurb}</p>
             </div>
-            <span className="font-mono text-lg text-primary">{p.price}</span>
+            <span className="whitespace-nowrap font-mono text-sm text-primary">{priceLabel(p)}</span>
           </div>
-          <button
-            onClick={() => add({ name: p.name, price: p.price })}
-            className="mt-4 border border-border py-2 text-xs font-bold uppercase tracking-widest transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
-          >
-            Add to cart
-          </button>
-        </article>
+          <span className="mt-4 inline-flex items-center justify-center gap-2 border border-border py-2 text-xs font-bold uppercase tracking-widest transition-colors group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
+            View product <ArrowRight className="h-3 w-3" />
+          </span>
+        </Link>
       ))}
     </div>
   );
