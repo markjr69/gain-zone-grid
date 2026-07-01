@@ -40,7 +40,8 @@ const CATEGORY_LINK: Record<Product["category"], { to: string; label: string }> 
 };
 
 function ProductPage() {
-  const { product } = Route.useLoaderData();
+  const data = Route.useLoaderData() as { product: Product };
+  const product = data.product;
   const cart = useCart();
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
