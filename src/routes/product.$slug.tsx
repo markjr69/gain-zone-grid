@@ -103,10 +103,7 @@ function ProductPage() {
       <div className="mt-8 grid gap-10 lg:grid-cols-2">
         {/* Media */}
         <div className="relative aspect-square overflow-hidden border border-border bg-[var(--surface-2)]">
-          <img src={product.image} alt={product.name} className="h-full w-full object-cover opacity-50" />
-          <div className="absolute inset-0 grid place-items-center font-display text-[10rem] leading-none text-border/80">
-            {product.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
-          </div>
+          <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
           {product.tag && (
             <span className="absolute left-4 top-4 bg-accent px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-accent-foreground">
               {product.tag}
