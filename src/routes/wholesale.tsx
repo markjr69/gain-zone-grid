@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useRef, useState } from "react";
 import { ArrowRight, Building2, Truck, Factory, BadgePercent } from "lucide-react";
 import img from "@/assets/cat-wholesale.jpg";
 import { CategoryHero } from "@/components/ProductGrid";
@@ -27,6 +28,41 @@ const lineup = [
 ];
 
 function WholesalePage() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const detailsRef = useRef<HTMLTextAreaElement>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
+  const [details, setDetails] = useState("");
+
+  function handleQuote(item: (typeof lineup)[number]) {
+    const prefill = `Inquiry regarding: ${item.name} (${item.moq}) - `;
+    setDetails(prefill);
+    requestAnimationFrame(() => {
+      formRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      setTimeout(() => detailsRef.current?.focus(), 400);
+    });
+  }
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    setStatus("sending");
+    try {
+      const res = await fetch("https://formspree.io/f/xpqgygel", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data,
+      });
+      if (res.ok) {
+        setStatus("ok");
+        form.reset();
+        setDetails("");
+      } else setStatus("err");
+    } catch {
+      setStatus("err");
+    }
+  }
+
   return (
     <>
       <CategoryHero
@@ -62,7 +98,10 @@ function WholesalePage() {
                     <div className="font-display text-lg tracking-wider">{l.name}</div>
                     <div className="font-mono text-xs text-muted-foreground">{l.moq} · Lead time {l.lead}</div>
                   </div>
-                  <button className="border border-border px-4 py-2 text-xs font-bold uppercase tracking-wider hover:border-primary hover:text-primary">
+                  <button
+                    onClick={() => handleQuote(l)}
+                    className="border border-border px-4 py-2 text-xs font-bold uppercase tracking-wider hover:border-primary hover:text-primary"
+                  >
                     Quote
                   </button>
                 </div>
@@ -70,15 +109,44 @@ function WholesalePage() {
             </div>
           </div>
 
-          <form className="space-y-4 border border-border bg-[var(--surface)] p-6 lg:col-span-2">
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="space-y-4 border border-border bg-[var(--surface)] p-6 lg:col-span-2"
+          >
             <h3 className="font-display text-2xl tracking-wider">Request a bulk quote</h3>
             <p className="text-xs text-muted-foreground">Tell us what you need. We reply within 24h.</p>
-            {["Business name", "Email", "Country", "What & quantity"].map((p) => (
-              <input key={p} placeholder={p} className="w-full bg-background px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-primary" />
-            ))}
-            <button type="button" className="flex w-full items-center justify-center gap-2 bg-primary py-3 text-xs font-bold uppercase tracking-widest text-primary-foreground">
-              Send inquiry <ArrowRight className="h-4 w-4" />
+            <input name="business" required placeholder="Business name" className="w-full bg-background px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-primary" />
+            <input name="email" type="email" required placeholder="Email" className="w-full bg-background px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-primary" />
+            <input name="country" required placeholder="Country" className="w-full bg-background px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-primary" />
+            <textarea
+              ref={detailsRef}
+              name="details"
+              required
+              rows={5}
+              placeholder="What & quantity"
+              value={details}
+              onChange={(e) => setDetails(e.target.value)}
+              className="w-full bg-background px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-primary"
+            />
+            <button
+              type="submit"
+              disabled={status === "sending"}
+              className="flex w-full items-center justify-center gap-2 bg-primary py-3 text-xs font-bold uppercase tracking-widest text-primary-foreground disabled:opacity-60"
+            >
+              {status === "sending" ? "Transmitting…" : (<>Send inquiry <ArrowRight className="h-4 w-4" /></>)}
             </button>
+
+            {status === "ok" && (
+              <div className="border border-primary bg-primary/10 p-3 text-xs text-primary">
+                Inquiry logged successfully. Wholesale division will contact you shortly!
+              </div>
+            )}
+            {status === "err" && (
+              <div className="border border-destructive bg-destructive/10 p-3 text-xs text-destructive">
+                Network error. Check connection or contact support directly.
+              </div>
+            )}
           </form>
         </div>
       </section>
