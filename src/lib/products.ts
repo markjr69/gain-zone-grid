@@ -1,8 +1,3 @@
-import catWeights from "@/assets/cat-weights.jpg";
-import catApparel from "@/assets/cat-apparel.jpg";
-import catAccessories from "@/assets/cat-accessories.jpg";
-import catPrograms from "@/assets/cat-programs.jpg";
-
 export type Category = "weights" | "gymwear" | "accessories" | "programs";
 
 export type VariantSpec =
@@ -51,7 +46,7 @@ export const PRODUCTS: Product[] = [
     category: "weights",
     blurb: "Rubber-coated hex head, chrome contour handle. Sold per dumbbell.",
     tag: "Bestseller",
-    image: catWeights,
+    image: "/images/hex-dumbbells.png",
     variant: { kind: "weight-kg", kgs: [2.5, 5, 7.5, 10, 12.5, 15, 20, 25, 30], ratePerKg: 10000 },
   },
   {
@@ -59,7 +54,7 @@ export const PRODUCTS: Product[] = [
     name: "Vinyl Dumbbells",
     category: "weights",
     blurb: "Vinyl-coated, cement filled. Grippy and floor-safe.",
-    image: catWeights,
+    image: "/images/vinyl-dumbbells.png",
     variant: { kind: "weight-kg", kgs: [1, 2, 5], ratePerKg: 12000 },
   },
   {
@@ -67,7 +62,7 @@ export const PRODUCTS: Product[] = [
     name: "Cast Iron Kettlebells",
     category: "weights",
     blurb: "Single-cast iron, powder-coated grip.",
-    image: catWeights,
+    image: "/images/kettlebells.png",
     variant: { kind: "weight-kg", kgs: [5, 10, 14, 16, 20], ratePerKg: 12500 },
   },
   {
@@ -75,7 +70,7 @@ export const PRODUCTS: Product[] = [
     name: "Weight Plates",
     category: "weights",
     blurb: "Standard bore plates. Sold each.",
-    image: catWeights,
+    image: "/images/weight-plates.png",
     variant: { kind: "weight-kg", kgs: [5, 10, 15, 20], ratePerKg: 11000 },
   },
   {
@@ -83,7 +78,7 @@ export const PRODUCTS: Product[] = [
     name: "Barbells & Bars",
     category: "weights",
     blurb: "Choose your bar spec — EZ, standard, or full olympic.",
-    image: catWeights,
+    image: "/images/barbells.png",
     variant: {
       kind: "options",
       label: "Bar type",
@@ -100,7 +95,7 @@ export const PRODUCTS: Product[] = [
     category: "weights",
     blurb: "Integrated weight-stack home gym systems.",
     tag: "Premium",
-    image: catWeights,
+    image: "/images/home-gym.png",
     variant: {
       kind: "options",
       label: "Stack size",
@@ -118,7 +113,7 @@ export const PRODUCTS: Product[] = [
     name: "Slam Balls",
     category: "weights",
     blurb: "No-bounce shell for maximum-effort throws.",
-    image: catWeights,
+    image: "/images/slam-balls.png",
     variant: { kind: "color", colors: ["Stealth Black", "Slate Grey", "Crimson Red"], price: 90000 },
   },
   {
@@ -126,7 +121,7 @@ export const PRODUCTS: Product[] = [
     name: "Ab Roller Wheels",
     category: "weights",
     blurb: "Dual-wheel core roller with knee pad.",
-    image: catWeights,
+    image: "/images/ab-roller.png",
     variant: { kind: "plain", price: 55000 },
   },
   {
@@ -134,7 +129,7 @@ export const PRODUCTS: Product[] = [
     name: "Push-up Boards",
     category: "weights",
     blurb: "Color-coded push-up board with multi-grip system.",
-    image: catWeights,
+    image: "/images/push-up-board.png",
     variant: { kind: "plain", price: 65000 },
   },
 
@@ -144,7 +139,7 @@ export const PRODUCTS: Product[] = [
     name: "Women's High Waist Leggings",
     category: "gymwear",
     blurb: "Squat-proof compression, high-rise waistband.",
-    image: catApparel,
+    image: "/images/womens-leggings.png",
     variant: {
       kind: "size",
       sizes: [
@@ -161,7 +156,7 @@ export const PRODUCTS: Product[] = [
     name: "Men's 2-in-1 Shorts",
     category: "gymwear",
     blurb: "Lined compression under a lightweight training short.",
-    image: catApparel,
+    image: "/images/mens-shorts.png",
     variant: {
       kind: "size",
       sizes: [
@@ -178,7 +173,7 @@ export const PRODUCTS: Product[] = [
     name: "Men's 2-in-1 Full Length Tights",
     category: "gymwear",
     blurb: "Full-length compression + short overlay.",
-    image: catApparel,
+    image: "/images/mens-tights.png",
     variant: {
       kind: "size",
       sizes: [
@@ -195,7 +190,7 @@ export const PRODUCTS: Product[] = [
     name: "Women's High Waist Biker Shorts",
     category: "gymwear",
     blurb: "7\" high-rise biker short, buttery compression.",
-    image: catApparel,
+    image: "/images/biker-shorts.png",
     variant: {
       kind: "size",
       sizes: [
@@ -213,7 +208,7 @@ export const PRODUCTS: Product[] = [
     category: "gymwear",
     blurb: "Long sleeve, tee, tights, shorts, tank — full kit.",
     tag: "Bundle",
-    image: catApparel,
+    image: "/images/mens-bundle.png",
     variant: {
       kind: "size",
       sizes: [
@@ -230,7 +225,7 @@ export const PRODUCTS: Product[] = [
     name: "Athletic Tank Tops",
     category: "gymwear",
     blurb: "Dropped armhole, breathable performance knit.",
-    image: catApparel,
+    image: "/images/tank-tops.png",
     variant: {
       kind: "size",
       sizes: [
@@ -247,7 +242,7 @@ export const PRODUCTS: Product[] = [
     name: "Premium Zip-Up Tracksuits",
     category: "gymwear",
     blurb: "Full-zip jacket + tapered pant. Warm-up ready.",
-    image: catApparel,
+    image: "/images/tracksuit.png",
     variant: {
       kind: "size",
       sizes: [
@@ -259,6 +254,40 @@ export const PRODUCTS: Product[] = [
       ],
     },
   },
+  {
+    slug: "premium-football-vests",
+    name: "Premium Football Vests",
+    category: "gymwear",
+    blurb: "Breathable training vest for football & pitch drills.",
+    image: "/images/football-vest.png",
+    variant: {
+      kind: "size",
+      sizes: [
+        { label: "S", price: 40000 },
+        { label: "M", price: 40000 },
+        { label: "L", price: 42000 },
+        { label: "XL", price: 45000 },
+        { label: "XXL", price: 48000 },
+      ],
+    },
+  },
+  {
+    slug: "xim-ladies-high-performance-leggings",
+    name: "Xim Ladies High-Performance Leggings",
+    category: "gymwear",
+    blurb: "Xim signature high-rise, sculpting compression fabric.",
+    image: "/images/xim-leggings.png",
+    variant: {
+      kind: "size",
+      sizes: [
+        { label: "S", price: 85000 },
+        { label: "M", price: 85000 },
+        { label: "L", price: 90000 },
+        { label: "XL", price: 95000 },
+        { label: "XXL", price: 100000 },
+      ],
+    },
+  },
 
   // ACCESSORIES
   {
@@ -266,7 +295,7 @@ export const PRODUCTS: Product[] = [
     name: "Heavy-Duty Resistance Bands",
     category: "accessories",
     blurb: "Latex loop bands, progressive tension.",
-    image: catAccessories,
+    image: "/images/resistance-bands.png",
     variant: { kind: "color", colors: ["Volt Yellow", "Crimson Red", "Stealth Black"], price: 45000 },
   },
   {
@@ -274,7 +303,7 @@ export const PRODUCTS: Product[] = [
     name: "Ergonomic Gym Gloves",
     category: "accessories",
     blurb: "Padded palm, wrist wrap support.",
-    image: catAccessories,
+    image: "/images/gym-gloves.png",
     variant: {
       kind: "size",
       sizes: [
@@ -290,7 +319,7 @@ export const PRODUCTS: Product[] = [
     name: "Premium Foam Yoga Mats",
     category: "accessories",
     blurb: "6mm high-density foam, non-slip surface.",
-    image: catAccessories,
+    image: "/images/yoga-mat.png",
     variant: { kind: "color", colors: ["Charcoal", "Ocean Blue", "Sunset Orange"], price: 75000 },
   },
   {
@@ -298,7 +327,7 @@ export const PRODUCTS: Product[] = [
     name: "Speed Jump Ropes",
     category: "accessories",
     blurb: "Bearing handles, adjustable steel cable.",
-    image: catAccessories,
+    image: "/images/jump-rope.png",
     variant: { kind: "plain", price: 30000 },
   },
   {
@@ -306,7 +335,7 @@ export const PRODUCTS: Product[] = [
     name: "Neoprene Waist Trainers",
     category: "accessories",
     blurb: "Compression waist trainer, sweat-boosting.",
-    image: catAccessories,
+    image: "/images/waist-trainer.png",
     variant: {
       kind: "size",
       sizes: [
@@ -322,7 +351,7 @@ export const PRODUCTS: Product[] = [
     name: "Insulated Water Bottles",
     category: "accessories",
     blurb: "1L stainless, 24h cold / 12h hot.",
-    image: catAccessories,
+    image: "/images/water-bottle.png",
     variant: { kind: "color", colors: ["Matte Black", "Titan White", "Volt Yellow"], price: 45000 },
   },
   {
@@ -331,7 +360,7 @@ export const PRODUCTS: Product[] = [
     category: "accessories",
     blurb: "HRV, SpO2, notifications, 14-day battery.",
     tag: "New",
-    image: catAccessories,
+    image: "/images/smart-watch.png",
     variant: { kind: "color", colors: ["Obsidian", "Silver Steel", "Rose Gold"], price: 250000 },
   },
   {
@@ -339,7 +368,7 @@ export const PRODUCTS: Product[] = [
     name: "Deep Tissue Massage Gun",
     category: "accessories",
     blurb: "5 speeds, 4 interchangeable heads.",
-    image: catAccessories,
+    image: "/images/massage-gun.png",
     variant: { kind: "plain", price: 300000 },
   },
   {
@@ -347,7 +376,7 @@ export const PRODUCTS: Product[] = [
     name: "Pro Leather Lifting Belts",
     category: "accessories",
     blurb: "10mm genuine leather, single-prong buckle.",
-    image: catAccessories,
+    image: "/images/lifting-belt.png",
     variant: {
       kind: "size",
       sizes: [
@@ -359,13 +388,13 @@ export const PRODUCTS: Product[] = [
     },
   },
 
-  // PROGRAMS (as line items)
+  // PROGRAMS
   {
     slug: "program-starter",
     name: "Starter Program",
     category: "programs",
     blurb: "4-week template to break the plateau.",
-    image: catPrograms,
+    image: "/images/program-starter.png",
     variant: { kind: "plain", price: 10000 },
   },
   {
@@ -374,7 +403,7 @@ export const PRODUCTS: Product[] = [
     category: "programs",
     blurb: "Custom training + macros. Monthly.",
     tag: "Popular",
-    image: catPrograms,
+    image: "/images/program-personalized.png",
     variant: { kind: "plain", price: 50000 },
   },
   {
@@ -382,7 +411,7 @@ export const PRODUCTS: Product[] = [
     name: "1:1 Coaching",
     category: "programs",
     blurb: "Direct-line Titan coach. Comp prep ready.",
-    image: catPrograms,
+    image: "/images/program-coaching.png",
     variant: { kind: "plain", price: 150000 },
   },
 ];

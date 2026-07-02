@@ -13,10 +13,7 @@ export function ProductGrid({ products }: { products: Product[] }) {
           className="group relative flex flex-col bg-background p-6 transition-colors hover:bg-[var(--surface)]"
         >
           <div className="relative aspect-square overflow-hidden bg-[var(--surface-2)]">
-            <img src={p.image} alt={p.name} className="h-full w-full object-cover opacity-40 transition-transform group-hover:scale-105" />
-            <div className="absolute inset-0 grid place-items-center font-display text-6xl text-border/80">
-              {p.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
-            </div>
+            <img src={p.image} alt={p.name} className="h-full w-full object-cover transition-transform group-hover:scale-105" />
             {p.tag && (
               <span className="absolute left-3 top-3 bg-accent px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-accent-foreground">
                 {p.tag}

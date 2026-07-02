@@ -1,11 +1,12 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
 import { X, Minus, Plus, ShoppingBag } from "lucide-react";
+import { useNavigate } from "@tanstack/react-router";
 import { formatShs } from "./format";
 
 export type CartItem = {
-  id: string; // compound: slug + variant
-  name: string; // display name including variant
-  price: number; // unit price in Shs
+  id: string;
+  name: string;
+  price: number;
   qty: number;
 };
 
@@ -58,7 +59,14 @@ export function useCart() {
 
 export function CartDrawer() {
   const { items, subtotal, setQty, remove, open, setOpen, clear } = useCart();
+  const navigate = useNavigate();
   if (!open) return null;
+
+  const goCheckout = () => {
+    setOpen(false);
+    navigate({ to: "/checkout" });
+  };
+
   return (
     <div className="fixed inset-0 z-[100]">
       <div className="absolute inset-0 bg-black/60" onClick={() => setOpen(false)} />
@@ -78,9 +86,6 @@ export function CartDrawer() {
             <ul className="space-y-4">
               {items.map((i) => (
                 <li key={i.id} className="flex items-start gap-3 border border-border p-3">
-                  <div className="grid h-16 w-16 shrink-0 place-items-center bg-[var(--surface-2)] font-display text-xl text-border">
-                    {i.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
-                  </div>
                   <div className="flex-1">
                     <div className="font-display text-sm tracking-wider">{i.name}</div>
                     <div className="mt-1 font-mono text-xs text-primary">{formatShs(i.price)}</div>
@@ -110,9 +115,10 @@ export function CartDrawer() {
           </div>
           <button
             disabled={items.length === 0}
+            onClick={goCheckout}
             className="mt-4 w-full bg-primary py-3 text-xs font-bold uppercase tracking-widest text-primary-foreground disabled:opacity-40"
           >
-            Checkout
+            Proceed to Checkout
           </button>
           {items.length > 0 && (
             <button onClick={clear} className="mt-2 w-full py-2 text-[10px] uppercase tracking-widest text-muted-foreground hover:text-primary">
