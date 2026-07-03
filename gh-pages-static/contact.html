@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact — GymTitan</title>
+<meta name="description" content="Support, sponsorship, wholesale and press — get in touch with GymTitan.">
+<meta property="og:title" content="Contact — GymTitan">
+<meta property="og:description" content="Support, sponsorship, wholesale and press — get in touch with GymTitan.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="nav">
+    <a href="index.html" class="brand"><span class="bolt">⚡</span> GymTitan</a>
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="weights.html">Weights</a>
+      <a href="apparel.html">Apparel</a>
+      <a href="accessories.html">Accessories</a>
+      <a href="programs.html">Programs</a>
+      <a href="wholesale.html">Wholesale</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Shop Now</a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+<main>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Contact</span>
+    <h1>Talk to <span class="volt">GymTitan.</span></h1>
+    <p>Support, sponsorship, press, or just a question about a product — drop us a line.</p>
+  </div>
+</section>
+<section class="section container">
+  <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:3rem" class="contact-grid">
+    <form class="form" data-mailto="hello@gymtitan.co" data-subject="GymTitan contact form">
+      <div class="form-row">
+        <div><label for="c-name">Name</label><input id="c-name" name="Name" required></div>
+        <div><label for="c-email">Email</label><input id="c-email" name="Email" type="email" required></div>
+      </div>
+      <div><label for="c-topic">Topic</label>
+        <select id="c-topic" name="Topic"><option>Product question</option><option>Order support</option><option>Coaching</option><option>Wholesale</option><option>Press</option><option>Other</option></select>
+      </div>
+      <div><label for="c-msg">Message</label><textarea id="c-msg" name="Message" required></textarea></div>
+      <button class="btn btn-primary" type="submit">Send message</button>
+    </form>
+    <div class="info-grid" style="grid-template-columns:1fr;margin-top:0">
+      <div class="info"><h4>Email</h4><p>hello@gymtitan.co<br>support@gymtitan.co</p></div>
+      <div class="info"><h4>Wholesale</h4><p>wholesale@gymtitan.co</p></div>
+      <div class="info"><h4>Hours</h4><p>Mon–Fri · 9am–6pm GMT<br>Replies within 24h</p></div>
+      <div class="info"><h4>Follow</h4><p>@gymtitan on Instagram, TikTok, YouTube</p></div>
+    </div>
+  </div>
+</section>
+<style>@media(max-width:820px){.contact-grid{grid-template-columns:1fr !important}}</style>
+
+</main>
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <div class="brand"><span class="bolt" style="color:#E8FF3A">⚡</span> GymTitan</div>
+      <p style="color:#9a9aa2;margin-top:.75rem;max-width:340px">High-voltage gear, programs and wholesale for athletes who don't quit. Dropship-ready worldwide.</p>
+    </div>
+    <div>
+      <h5>Shop</h5>
+      <a href="weights.html">Weights</a>
+      <a href="apparel.html">Apparel</a>
+      <a href="accessories.html">Accessories</a>
+    </div>
+    <div>
+      <h5>Coaching</h5>
+      <a href="programs.html">Programs</a>
+      <a href="programs.html">Diet plans</a>
+      <a href="wholesale.html">Wholesale</a>
+    </div>
+    <div>
+      <h5>Company</h5>
+      <a href="contact.html">Contact</a>
+      <a href="mailto:hello@gymtitan.co">hello@gymtitan.co</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span id="yr"></span> GymTitan. All rights reserved.</span>
+    <span>Built voltage-strong ⚡</span>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script src="js/main.js"></script>
+</body></html>
