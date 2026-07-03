@@ -22,6 +22,7 @@ function CheckoutPage() {
   const { items, subtotal, clear } = useCart();
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
   const [iframeUrl, setIframeUrl] = useState<string | null>(null);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -133,18 +134,33 @@ function CheckoutPage() {
               <div className="mb-3 flex items-center justify-between">
                 <h2 className="font-display text-2xl tracking-wider">Secure payment</h2>
                 <button
-                  onClick={() => setIframeUrl(null)}
+                  onClick={() => { setIframeUrl(null); setIframeLoaded(false); }}
                   className="text-[10px] uppercase tracking-widest text-muted-foreground hover:text-primary"
                 >
                   ← Back to form
                 </button>
               </div>
-              <iframe
-                title="Pesapal Checkout"
-                src={iframeUrl}
-                className="h-[720px] w-full border-0 bg-white"
-                allow="payment *"
-              />
+              <div className="relative h-[720px] w-full overflow-hidden bg-white">
+                {!iframeLoaded && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[var(--surface-2)]">
+                    <div className="h-10 w-10 animate-spin rounded-full border-2 border-border border-t-primary" />
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                      Connecting to Pesapal…
+                    </p>
+                  </div>
+                )}
+                <iframe
+                  title="Pesapal Checkout"
+                  src={iframeUrl}
+                  onLoad={() => setIframeLoaded(true)}
+                  className="h-full w-full border-0 bg-white"
+                  allow="payment *"
+                />
+              </div>
+              <div className="mt-3 flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
+                Encrypted · Powered by Pesapal
+              </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4 border border-border bg-[var(--surface)] p-6">
