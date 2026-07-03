@@ -22,6 +22,7 @@ function CheckoutPage() {
   const { items, subtotal, clear } = useCart();
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
   const [iframeUrl, setIframeUrl] = useState<string | null>(null);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
