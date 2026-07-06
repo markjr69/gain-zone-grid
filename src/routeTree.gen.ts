@@ -13,6 +13,7 @@ import { Route as WholesaleRouteImport } from './routes/wholesale'
 import { Route as WeightsRouteImport } from './routes/weights'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ProgramsRouteImport } from './routes/programs'
+import { Route as PaymentInstructionsRouteImport } from './routes/payment-instructions'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ApparelRouteImport } from './routes/apparel'
@@ -38,6 +39,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ProgramsRoute = ProgramsRouteImport.update({
   id: '/programs',
   path: '/programs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentInstructionsRoute = PaymentInstructionsRouteImport.update({
+  id: '/payment-instructions',
+  path: '/payment-instructions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/apparel': typeof ApparelRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/payment-instructions': typeof PaymentInstructionsRoute
   '/programs': typeof ProgramsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/weights': typeof WeightsRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/apparel': typeof ApparelRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/payment-instructions': typeof PaymentInstructionsRoute
   '/programs': typeof ProgramsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/weights': typeof WeightsRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/apparel': typeof ApparelRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/payment-instructions': typeof PaymentInstructionsRoute
   '/programs': typeof ProgramsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/weights': typeof WeightsRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/apparel'
     | '/checkout'
     | '/contact'
+    | '/payment-instructions'
     | '/programs'
     | '/sitemap.xml'
     | '/weights'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/apparel'
     | '/checkout'
     | '/contact'
+    | '/payment-instructions'
     | '/programs'
     | '/sitemap.xml'
     | '/weights'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/apparel'
     | '/checkout'
     | '/contact'
+    | '/payment-instructions'
     | '/programs'
     | '/sitemap.xml'
     | '/weights'
@@ -153,6 +165,7 @@ export interface RootRouteChildren {
   ApparelRoute: typeof ApparelRoute
   CheckoutRoute: typeof CheckoutRoute
   ContactRoute: typeof ContactRoute
+  PaymentInstructionsRoute: typeof PaymentInstructionsRoute
   ProgramsRoute: typeof ProgramsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   WeightsRoute: typeof WeightsRoute
@@ -188,6 +201,13 @@ declare module '@tanstack/react-router' {
       path: '/programs'
       fullPath: '/programs'
       preLoaderRoute: typeof ProgramsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payment-instructions': {
+      id: '/payment-instructions'
+      path: '/payment-instructions'
+      fullPath: '/payment-instructions'
+      preLoaderRoute: typeof PaymentInstructionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -241,6 +261,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApparelRoute: ApparelRoute,
   CheckoutRoute: CheckoutRoute,
   ContactRoute: ContactRoute,
+  PaymentInstructionsRoute: PaymentInstructionsRoute,
   ProgramsRoute: ProgramsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   WeightsRoute: WeightsRoute,

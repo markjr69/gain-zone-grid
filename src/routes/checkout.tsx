@@ -14,9 +14,6 @@ export const Route = createFileRoute("/checkout")({
   component: CheckoutPage,
 });
 
-// WhatsApp number that receives Mobile Money payment confirmations.
-const PAYMENT_WHATSAPP_NUMBER = "256785546219";
-
 function CheckoutPage() {
   const { items, subtotal, clear } = useCart();
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
@@ -63,13 +60,10 @@ function CheckoutPage() {
       return;
     }
 
-    // Mobile Money: redirect to WhatsApp with a pre-filled confirmation message.
+    // Mobile Money: route to the dedicated payment instructions page.
     if (payment === "Mobile Money") {
-      const message = `Hi dear customer, we wanted to confirm your order. Please send the payment of ${formatShs(subtotal)} to MTN number 0785546219 (Mark Ainamani) to complete it.`;
-      const waUrl = `https://wa.me/${PAYMENT_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
       clear();
-      setStatus("ok");
-      window.location.href = waUrl;
+      window.location.href = "/payment-instructions";
       return;
     }
 
