@@ -13,17 +13,16 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
-import { WhatsAppButton } from "../components/WhatsAppButton";
-import { CartProvider, CartDrawer } from "../lib/cart";
+import { Button } from "../components/ui/button";
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="font-display text-8xl text-primary">404</h1>
-        <h2 className="mt-4 font-display text-2xl tracking-wider">Off the rack</h2>
+        <h2 className="mt-4 font-display text-2xl tracking-wider">Let’s get you back on track</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          This page doesn't exist. Rerack and try again.
+          This page doesn’t exist. Find your next step with Apex.
         </p>
         <div className="mt-6">
           <Link to="/" className="inline-flex items-center justify-center bg-primary px-6 py-3 text-xs font-bold uppercase tracking-widest text-primary-foreground">
@@ -48,12 +47,12 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         <h1 className="font-display text-2xl tracking-wider">Something failed mid-rep</h1>
         <p className="mt-2 text-sm text-muted-foreground">Try again or head home.</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
+          <Button
             onClick={() => { router.invalidate(); reset(); }}
             className="bg-primary px-6 py-3 text-xs font-bold uppercase tracking-widest text-primary-foreground"
           >
             Try again
-          </button>
+          </Button>
           <a href="/" className="border border-border px-6 py-3 text-xs font-bold uppercase tracking-widest">
             Go home
           </a>
@@ -68,20 +67,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "GymTitan — Forged for the Relentless" },
-      { name: "description", content: "GymTitan: dumbbells, barbells, apparel, accessories, smart wearables, personalized training and diet programs, and wholesale gym equipment." },
-      { property: "og:title", content: "GymTitan — Forged for the Relentless" },
-      { property: "og:description", content: "GymTitan: dumbbells, barbells, apparel, accessories, smart wearables, personalized training and diet programs, and wholesale gym equipment." },
+      { title: "Apex Mobile Trainers — On-Site Fitness in Kampala" },
+      { name: "description", content: "Personal and corporate fitness coaching at your office, home or compound in Kampala." },
+      { property: "og:site_name", content: "Apex Mobile Trainers" },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "GymTitan" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "GymTitan — Forged for the Relentless" },
-      { name: "twitter:description", content: "GymTitan: dumbbells, barbells, apparel, accessories, smart wearables, personalized training and diet programs, and wholesale gym equipment." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e3099e84-0e70-4e7c-8ef9-3208436f6666/id-preview-761aea7f--b373dfb5-a192-438b-8b24-7f9c9760b293.lovable.app-1782468923919.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e3099e84-0e70-4e7c-8ef9-3208436f6666/id-preview-761aea7f--b373dfb5-a192-438b-8b24-7f9c9760b293.lovable.app-1782468923919.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" },
@@ -109,17 +103,13 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <CartProvider>
         <div className="flex min-h-screen flex-col">
           <SiteHeader />
           <main className="flex-1">
             <Outlet />
           </main>
           <SiteFooter />
-          <WhatsAppButton />
-          <CartDrawer />
         </div>
-      </CartProvider>
     </QueryClientProvider>
   );
 }

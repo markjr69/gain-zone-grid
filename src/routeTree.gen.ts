@@ -12,10 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WholesaleRouteImport } from './routes/wholesale'
 import { Route as WeightsRouteImport } from './routes/weights'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as PaymentInstructionsRouteImport } from './routes/payment-instructions'
+import { Route as PackagesRouteImport } from './routes/packages'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as CalculatorsRouteImport } from './routes/calculators'
 import { Route as ApparelRouteImport } from './routes/apparel'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
 import { Route as IndexRouteImport } from './routes/index'
@@ -36,6 +40,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProgramsRoute = ProgramsRouteImport.update({
   id: '/programs',
   path: '/programs',
@@ -46,6 +55,16 @@ const PaymentInstructionsRoute = PaymentInstructionsRouteImport.update({
   path: '/payment-instructions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PackagesRoute = PackagesRouteImport.update({
+  id: '/packages',
+  path: '/packages',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -54,6 +73,11 @@ const ContactRoute = ContactRouteImport.update({
 const CheckoutRoute = CheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalculatorsRoute = CalculatorsRouteImport.update({
+  id: '/calculators',
+  path: '/calculators',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApparelRoute = ApparelRouteImport.update({
@@ -81,10 +105,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
   '/apparel': typeof ApparelRoute
+  '/calculators': typeof CalculatorsRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/packages': typeof PackagesRoute
   '/payment-instructions': typeof PaymentInstructionsRoute
   '/programs': typeof ProgramsRoute
+  '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/weights': typeof WeightsRoute
   '/wholesale': typeof WholesaleRoute
@@ -94,10 +122,14 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
   '/apparel': typeof ApparelRoute
+  '/calculators': typeof CalculatorsRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/packages': typeof PackagesRoute
   '/payment-instructions': typeof PaymentInstructionsRoute
   '/programs': typeof ProgramsRoute
+  '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/weights': typeof WeightsRoute
   '/wholesale': typeof WholesaleRoute
@@ -108,10 +140,14 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
   '/apparel': typeof ApparelRoute
+  '/calculators': typeof CalculatorsRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/packages': typeof PackagesRoute
   '/payment-instructions': typeof PaymentInstructionsRoute
   '/programs': typeof ProgramsRoute
+  '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/weights': typeof WeightsRoute
   '/wholesale': typeof WholesaleRoute
@@ -123,10 +159,14 @@ export interface FileRouteTypes {
     | '/'
     | '/accessories'
     | '/apparel'
+    | '/calculators'
     | '/checkout'
     | '/contact'
+    | '/how-it-works'
+    | '/packages'
     | '/payment-instructions'
     | '/programs'
+    | '/services'
     | '/sitemap.xml'
     | '/weights'
     | '/wholesale'
@@ -136,10 +176,14 @@ export interface FileRouteTypes {
     | '/'
     | '/accessories'
     | '/apparel'
+    | '/calculators'
     | '/checkout'
     | '/contact'
+    | '/how-it-works'
+    | '/packages'
     | '/payment-instructions'
     | '/programs'
+    | '/services'
     | '/sitemap.xml'
     | '/weights'
     | '/wholesale'
@@ -149,10 +193,14 @@ export interface FileRouteTypes {
     | '/'
     | '/accessories'
     | '/apparel'
+    | '/calculators'
     | '/checkout'
     | '/contact'
+    | '/how-it-works'
+    | '/packages'
     | '/payment-instructions'
     | '/programs'
+    | '/services'
     | '/sitemap.xml'
     | '/weights'
     | '/wholesale'
@@ -163,10 +211,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccessoriesRoute: typeof AccessoriesRoute
   ApparelRoute: typeof ApparelRoute
+  CalculatorsRoute: typeof CalculatorsRoute
   CheckoutRoute: typeof CheckoutRoute
   ContactRoute: typeof ContactRoute
+  HowItWorksRoute: typeof HowItWorksRoute
+  PackagesRoute: typeof PackagesRoute
   PaymentInstructionsRoute: typeof PaymentInstructionsRoute
   ProgramsRoute: typeof ProgramsRoute
+  ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   WeightsRoute: typeof WeightsRoute
   WholesaleRoute: typeof WholesaleRoute
@@ -196,6 +248,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/programs': {
       id: '/programs'
       path: '/programs'
@@ -210,6 +269,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PaymentInstructionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/packages': {
+      id: '/packages'
+      path: '/packages'
+      fullPath: '/packages'
+      preLoaderRoute: typeof PackagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -222,6 +295,13 @@ declare module '@tanstack/react-router' {
       path: '/checkout'
       fullPath: '/checkout'
       preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculators': {
+      id: '/calculators'
+      path: '/calculators'
+      fullPath: '/calculators'
+      preLoaderRoute: typeof CalculatorsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/apparel': {
@@ -259,10 +339,14 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccessoriesRoute: AccessoriesRoute,
   ApparelRoute: ApparelRoute,
+  CalculatorsRoute: CalculatorsRoute,
   CheckoutRoute: CheckoutRoute,
   ContactRoute: ContactRoute,
+  HowItWorksRoute: HowItWorksRoute,
+  PackagesRoute: PackagesRoute,
   PaymentInstructionsRoute: PaymentInstructionsRoute,
   ProgramsRoute: ProgramsRoute,
+  ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   WeightsRoute: WeightsRoute,
   WholesaleRoute: WholesaleRoute,
