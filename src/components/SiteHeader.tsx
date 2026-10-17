@@ -1,69 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, ShoppingBag } from "lucide-react";
-import { useCart } from "@/lib/cart";
-
-const nav = [
-  { to: "/weights", label: "Weights" },
-  { to: "/apparel", label: "Gym wear" },
-  { to: "/accessories", label: "Accessories" },
-  { to: "/programs", label: "Programs" },
-  { to: "/wholesale", label: "Wholesale" },
-  { to: "/contact", label: "Contact" },
-] as const;
-
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+const nav = [{ to: "/services", label: "Services" }, { to: "/packages", label: "Packages" }, { to: "/calculators", label: "Calculators" }, { to: "/how-it-works", label: "How It Works" }, { to: "/contact", label: "Contact" }] as const;
 export function SiteHeader() {
-  const [open, setOpen] = useState(false);
-  const { count, setOpen: setCartOpen } = useCart();
-  return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="grid h-8 w-8 place-items-center bg-primary font-display text-xl text-primary-foreground">G</span>
-          <span className="font-display text-2xl tracking-wider">GYM<span className="text-primary">TITAN</span></span>
-        </Link>
-        <nav className="hidden items-center gap-8 lg:flex">
-          {nav.map((n) => (
-            <Link
-              key={n.to}
-              to={n.to}
-              className="text-sm font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-primary"
-              activeProps={{ className: "text-primary" }}
-            >
-              {n.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => setCartOpen(true)}
-            className="relative flex items-center gap-2 border border-border px-3 py-2 text-xs font-bold uppercase tracking-wider transition-colors hover:border-primary hover:text-primary lg:px-4"
-          >
-            <ShoppingBag className="h-4 w-4" />
-            <span className="hidden lg:inline">Cart</span>
-            <span className="grid h-5 min-w-5 place-items-center bg-primary px-1 font-mono text-[10px] text-primary-foreground">{count}</span>
-          </button>
-          <button onClick={() => setOpen(!open)} className="lg:hidden" aria-label="Menu">
-            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
-        </div>
-      </div>
-      {open && (
-        <div className="border-t border-border bg-background lg:hidden">
-          <nav className="flex flex-col px-4 py-4">
-            {nav.map((n) => (
-              <Link
-                key={n.to}
-                to={n.to}
-                onClick={() => setOpen(false)}
-                className="border-b border-border py-3 font-display text-xl tracking-wider"
-              >
-                {n.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
-    </header>
-  );
+ const [open, setOpen] = useState(false);
+ return <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md"><div className="mx-auto flex min-h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6"><Link to="/" aria-label="Apex Mobile Trainers home" className="flex shrink-0 items-center gap-3"><span className="grid h-10 w-10 place-items-center bg-primary font-display text-3xl text-primary-foreground">A</span><span className="font-display text-2xl leading-none">APEX<span className="mt-1 block font-sans text-[10px] font-bold text-primary">MOBILE TRAINERS</span></span></Link><nav aria-label="Main navigation" className="hidden items-center gap-5 xl:flex">{nav.map(n => <Link key={n.to} to={n.to} className="text-[11px] font-bold uppercase text-muted-foreground transition-colors hover:text-primary" activeProps={{ className: "text-primary" }}>{n.label}</Link>)}</nav><div className="flex items-center gap-2"><Button asChild variant="outline" className="hidden rounded-none text-[10px] font-bold uppercase md:inline-flex"><Link to="/contact" search={{ type: 'pilot' }}>Book a Pilot</Link></Button><Button asChild className="hidden rounded-none text-[10px] font-bold uppercase sm:inline-flex"><Link to="/contact" search={{ type: 'strategy' }}>Schedule a Free Call <ArrowUpRight /></Link></Button><Button variant="ghost" size="icon" className="xl:hidden" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</Button></div></div>{open && <nav aria-label="Mobile navigation" className="border-t border-border px-4 py-4 xl:hidden">{nav.map(n => <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="block border-b border-border py-3 font-display text-xl">{n.label}</Link>)}<div className="mt-4 flex flex-wrap gap-3"><Button asChild className="rounded-none"><Link to="/contact" search={{ type: 'strategy' }} onClick={() => setOpen(false)}>Schedule a Free Call</Link></Button><Button asChild variant="outline" className="rounded-none"><Link to="/contact" search={{ type: 'pilot' }} onClick={() => setOpen(false)}>Book a Pilot</Link></Button></div></nav>}</header>;
 }

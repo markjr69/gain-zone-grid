@@ -1,0 +1,6 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { pageHead } from '@/lib/agency';
+import { CallCTA, GoalsGrid, SectionTitle, ServicesGrid } from '@/components/AgencySections';
+
+export const Route = createFileRoute('/services')({ head: () => pageHead('On-Site Fitness Services in Kampala', 'Corporate, home and couples personal training. Certified fitness trainers come to your office, home or compound in Kampala.'), component: ServicesPage });
+function ServicesPage() { return <><section className="mx-auto max-w-7xl px-4 py-16 sm:px-6"><p className="font-mono text-xs text-primary">/ SERVICES</p><h1 className="mt-4 text-5xl leading-tight sm:text-6xl">Expert coaching.<br /><span className="text-primary">Where you are.</span></h1><p className="mt-6 max-w-2xl text-muted-foreground">Certified trainers. Customized workouts. Nutrition that works with your life. We bring the training to you.</p><ServicesGrid /></section><section className="border-t border-border"><div className="mx-auto max-w-7xl px-4 py-16 sm:px-6"><SectionTitle eyebrow="your goals" title="Train for the life" accent="you want." /><GoalsGrid /><p className="mt-7 text-xs text-muted-foreground">Bloodwork reviews are for fitness planning, not medical diagnosis. Discuss medical concerns with your healthcare professional.</p></div></section><CallCTA /></>; }
