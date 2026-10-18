@@ -1,4 +1,9 @@
 # Apex Mobile Trainers
+- [ ] Simplify fonts, replace logo, update homepage buttons and footer socials.
+- [ ] Add email/password and phone-code client sign-in with saved profiles.
+- [ ] Add private trainee workouts, measurements and calorie logs.
+- [ ] Add company-scoped HR progress and engagement view.
+- [ ] Move calculators into client portal and verify access restrictions.
 - [ ] Replace store branding, navigation and homepage with mobile fitness agency.
 - [ ] Add services, packages, calculators and how-it-works pages.
 - [ ] Connect strategy-call and corporate-pilot requests using existing lead endpoints.
