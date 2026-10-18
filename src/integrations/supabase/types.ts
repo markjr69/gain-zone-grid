@@ -56,15 +56,149 @@ export type Database = {
         }
         Relationships: []
       }
+      companies: {
+        Row: {
+          id: string
+          name: string
+        }
+        Insert: {
+          id?: string
+          name: string
+        }
+        Update: {
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      company_members: {
+        Row: {
+          company_id: string
+          user_id: string
+        }
+        Insert: {
+          company_id: string
+          user_id: string
+        }
+        Update: {
+          company_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "company_members_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fitness_entries: {
+        Row: {
+          calories: number
+          created_at: string
+          entry_date: string
+          height_cm: number
+          id: string
+          user_id: string
+          weight_kg: number
+        }
+        Insert: {
+          calories: number
+          created_at?: string
+          entry_date?: string
+          height_cm: number
+          id?: string
+          user_id?: string
+          weight_kg: number
+        }
+        Update: {
+          calories?: number
+          created_at?: string
+          entry_date?: string
+          height_cm?: number
+          id?: string
+          user_id?: string
+          weight_kg?: number
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string
+          id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      workout_logs: {
+        Row: {
+          completed: boolean
+          created_at: string
+          duration_minutes: number
+          id: string
+          title: string
+          user_id: string
+          workout_date: string
+        }
+        Insert: {
+          completed?: boolean
+          created_at?: string
+          duration_minutes: number
+          id?: string
+          title: string
+          user_id?: string
+          workout_date?: string
+        }
+        Update: {
+          completed?: boolean
+          created_at?: string
+          duration_minutes?: number
+          id?: string
+          title?: string
+          user_id?: string
+          workout_date?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      can_view_trainee: { Args: { target: string }; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "trainee" | "hr"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -191,6 +325,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["trainee", "hr"],
+    },
   },
 } as const
