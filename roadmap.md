@@ -1,11 +1,9 @@
 # Apex Mobile Trainers
-- [ ] Simplify fonts, replace logo, update homepage buttons and footer socials.
-- [ ] Add email/password and phone-code client sign-in with saved profiles.
-- [ ] Add private trainee workouts, measurements and calorie logs.
-- [ ] Add company-scoped HR progress and engagement view.
-- [ ] Move calculators into client portal and verify access restrictions.
-- [ ] Replace store branding, navigation and homepage with mobile fitness agency.
-- [ ] Add services, packages, calculators and how-it-works pages.
-- [ ] Connect strategy-call and corporate-pilot requests using existing lead endpoints.
-- [ ] Remove ecommerce and replace legacy URLs with redirects.
-- [ ] Verify pages, calculations, lead forms and security update.
+- [x] Apply normal fonts, glowing-dot branding, package and portal buttons, and lower call links.
+- [x] Create private trainee workouts, BMI, calorie journal, saved profiles and calculators.
+- [x] Create company-scoped HR workout, engagement and activity views.
+- [x] Remove public calculators and retire old shopping pages with redirects.
+- [x] Verify homepage, packages, signed-out access and fitness tests; apply security update.
+- [ ] Verify saved trainee and HR flows with real accounts — blocked: no signed-up users or assigned company HR account.
+- [ ] Enable and verify phone SMS sign-in — blocked: SMS provider setup is not available.
+- [ ] Link footer social buttons — blocked: awaiting LinkedIn, Instagram and TikTok profile URLs.
