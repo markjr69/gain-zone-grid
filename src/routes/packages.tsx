@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { pageHead, services } from '@/lib/agency';
 
-export const Route = createFileRoute('/packages')({ validateSearch: (search: { type?: unknown; service?: unknown }) => ({ service: ['corporate', 'home', 'couples'].includes(String(search.service)) ? String(search.service) : 'corporate' }), head: () => pageHead('Personal & Corporate Training Packages', 'Explore corporate, home and couples training packages from Apex Mobile Trainers. Request tailored pricing with a free strategy call.'), component: PackagesPage });
+export const Route = createFileRoute('/packages')({ validateSearch: (search: { type?: unknown; service?: unknown }): { service?: string } => ({ service: ['corporate', 'home', 'couples'].includes(String(search.service)) ? String(search.service) : 'corporate' }), head: () => pageHead('Personal & Corporate Training Packages', 'Explore corporate, home and couples training packages from Apex Mobile Trainers. Request tailored pricing with a free strategy call.'), component: PackagesPage });
 function PackagesPage() {
   const { service } = Route.useSearch();
   const navigate = Route.useNavigate();
