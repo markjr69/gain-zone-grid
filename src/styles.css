@@ -30,8 +30,8 @@
   --color-ring: var(--ring);
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
-  --font-display: "Anton", "Bebas Neue", system-ui, sans-serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "DM Sans", system-ui, sans-serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
@@ -80,8 +80,9 @@
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
+    letter-spacing: 0;
+    font-weight: 700;
+    text-transform: none;
   }
 }
 
@@ -110,3 +111,6 @@
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+
+.brand-dot { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--primary); box-shadow: 0 0 15px var(--primary); flex-shrink: 0; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .marquee { animation: none; } }

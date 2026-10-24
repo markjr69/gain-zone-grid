@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep signed-in fitness screens under the managed `_authenticated` layout at named URLs; this avoids duplicate home routes and keeps protected loaders behind the session gate.
+- Use authenticated server functions and row-level policies for portal reads and writes; company HR access must never be granted by browser state.
