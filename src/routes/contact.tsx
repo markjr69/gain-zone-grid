@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { Clock, MapPin, ShieldCheck } from 'lucide-react';
 import { BookingForm } from '@/components/BookingForm';
 import { pageHead } from '@/lib/agency';
-export const Route = createFileRoute('/contact')({ validateSearch: (search: Record<string, unknown>) => ({ type: search.type === 'pilot' ? 'pilot' : 'strategy', service: ['Corporate Training', 'Home Personal Training', 'Couples Training'].includes(String(search.service)) ? String(search.service) : 'Home Personal Training' }), head: () => pageHead('Schedule Your Free Call or Corporate Pilot', 'Book a free 15-minute strategy call or request a free 30-minute on-site corporate fitness pilot in Kampala with Apex Mobile Trainers.'), component: ContactPage });
+export const Route = createFileRoute('/contact')({ validateSearch: (search: { type?: unknown; service?: unknown }): { type?: string; service?: string } => ({ type: search.type === 'pilot' ? 'pilot' : 'strategy', service: ['Corporate Training', 'Home Personal Training', 'Couples Training'].includes(String(search.service)) ? String(search.service) : 'Home Personal Training' }), head: () => pageHead('Schedule Your Free Call or Corporate Pilot', 'Book a free 15-minute strategy call or request a free 30-minute on-site corporate fitness pilot in Kampala with Apex Mobile Trainers.'), component: ContactPage });
 function ContactPage() {
  const { type, service } = Route.useSearch();
  const pilot = type === 'pilot';

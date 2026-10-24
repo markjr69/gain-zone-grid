@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-const BASE_URL = "";
+const BASE_URL = "https://gain-zone-grind.lovable.app";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -9,11 +9,9 @@ export const Route = createFileRoute("/sitemap.xml")({
       GET: async () => {
         const entries = [
           { path: "/", priority: "1.0" },
-          { path: "/weights", priority: "0.9" },
-          { path: "/apparel", priority: "0.9" },
-          { path: "/accessories", priority: "0.9" },
-          { path: "/programs", priority: "0.9" },
-          { path: "/wholesale", priority: "0.8" },
+          { path: "/services", priority: "0.9" },
+          { path: "/packages", priority: "0.9" },
+          { path: "/how-it-works", priority: "0.9" },
           { path: "/contact", priority: "0.6" },
         ];
         const urls = entries
