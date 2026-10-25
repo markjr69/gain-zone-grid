@@ -2,7 +2,8 @@ import { describe, it } from 'node:test';
 import { strict as assert } from 'node:assert';
 import { calculateBMI, calculateTDEE } from './fitness';
 import { services } from './agency';
-import { traineeProgress } from './portal-metrics';
+import { traineeProgress, weeklyProgress } from './portal-metrics';
+import { calendarDateSchema } from './portal-schema';
 const expect = (value: any) => ({ toBe: (expected: any) => assert.equal(value, expected), toEqual: (expected: any) => assert.deepEqual(value, expected), toBeNull: () => assert.equal(value, null), toContain: (expected: any) => assert.ok(value.includes(expected)), toBeCloseTo: (expected: number, digits: number) => assert.ok(Math.abs(value - expected) < 10 ** -digits) });
 
 describe('fitness calculations', () => {
@@ -18,4 +19,20 @@ describe('agency session rules', () => {
 });
 describe('private trainee progress', () => {
   it('counts only the selected trainee workouts', () => assert.deepEqual(traineeProgress('a', [{ user_id: 'a', completed: true, duration_minutes: 30 }, { user_id: 'a', completed: false, duration_minutes: 45 }, { user_id: 'b', completed: true, duration_minutes: 60 }]), { planned: 2, done: 1, minutes: 30, engagement: 50 }));
+});
+describe('weekly progress and journal dates', () => {
+  it('counts the current seven days only for the selected trainee', () => {
+    const workouts = [
+      { user_id: 'a', completed: true, duration_minutes: 30, workout_date: '2026-10-19' },
+      { user_id: 'a', completed: false, duration_minutes: 45, workout_date: '2026-10-25' },
+      { user_id: 'a', completed: true, duration_minutes: 60, workout_date: '2026-10-18' },
+      { user_id: 'a', completed: true, duration_minutes: 60, workout_date: '2026-10-26' },
+      { user_id: 'b', completed: true, duration_minutes: 60, workout_date: '2026-10-25' },
+    ];
+    assert.deepEqual(weeklyProgress('a', workouts, '2026-10-25'), { planned: 2, done: 1, minutes: 30, engagement: 50 });
+  });
+  it('rejects impossible dates while accepting leap days', () => {
+    assert.equal(calendarDateSchema.safeParse('2026-02-30').success, false);
+    assert.equal(calendarDateSchema.safeParse('2024-02-29').success, true);
+  });
 });

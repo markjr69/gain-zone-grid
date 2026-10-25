@@ -15,6 +15,13 @@
       "when": 1792310752635,
       "tag": "0001_client_fitness_portal",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792922970296,
+      "tag": "0002_restrict_portal_function_execution",
+      "breakpoints": true
     }
   ]
 }
