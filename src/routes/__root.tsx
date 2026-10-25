@@ -55,9 +55,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
           >
             Try again
           </Button>
-          <a href="/" className="border border-border px-6 py-3 text-xs font-bold uppercase tracking-widest">
-            Go home
-          </a>
+          <Button asChild variant="outline"><Link to="/">Go home</Link></Button>
         </div>
       </div>
     </div>
@@ -115,8 +113,9 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
         <div className="flex min-h-screen flex-col">
+          <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-primary focus:px-5 focus:py-3 focus:text-primary-foreground">Skip to content</a>
           <SiteHeader />
-          <main className="flex-1">
+          <main id="main-content" tabIndex={-1} className="flex-1">
             <Outlet />
           </main>
           <SiteFooter />

@@ -11,3 +11,4 @@
 
 - Keep signed-in fitness screens under the managed `_authenticated` layout at named URLs; this avoids duplicate home routes and keeps protected loaders behind the session gate.
 - Use authenticated server functions and row-level policies for portal reads and writes; company HR access must never be granted by browser state.
+- Keep date validation and date-window progress calculations in client-safe portal modules with tests so journal and dashboard totals stay consistent.
