@@ -1,4 +1,7 @@
 # Apex Mobile Trainers
+- [ ] Audit and correct errors across pages, booking and signed-in portal.
+- [ ] Improve mobile first-screen layout, package answers, accessibility and progress views.
+- [ ] Recheck public pages, saved fitness flows and tests.
 - [x] Apply normal fonts, glowing-dot branding, package and portal buttons, and lower call links.
 - [x] Create private trainee workouts, BMI, calorie journal, saved profiles and calculators.
 - [x] Create company-scoped HR workout, engagement and activity views.
