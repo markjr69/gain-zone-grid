@@ -17,22 +17,24 @@ export const getPortal = createServerFn({ method: 'POST' })
     for (const result of [profiles, workouts, entries, roles, members, companies]) {
       if (result.error) throw new Error('Unable to load your portal. Please try again.');
     }
-    return { userId, profiles: profiles.data ?? [], workouts: workouts.data ?? [], entries: entries.data ?? [], isHR: roles.data?.some(r => r.role === 'hr') ?? false, members: members.data ?? [], companies: companies.data ?? [] };
+    const roleList = (roles.data ?? []).map(r => String(r.role));
+    return { userId, profiles: profiles.data ?? [], workouts: workouts.data ?? [], entries: entries.data ?? [], isHR: roleList.includes('hr'), isCoach: roleList.includes('coach'), members: members.data ?? [], companies: companies.data ?? [] };
   });
 
+// Coach-only: row-level policies reject writes from non-coach accounts.
 export const saveWorkout = createServerFn({ method: 'POST' })
   .middleware([requireSupabaseAuth])
-  .inputValidator(workoutSchema)
-  .handler(async ({ data, context: { supabase, userId } }) => {
-    const { error } = await supabase.from('workout_logs').insert({ ...data, user_id: userId });
-    if (error) throw new Error('Your workout could not be saved. Please try again.');
+  .inputValidator(workoutSchema.extend({ user_id: z.string().uuid(), feedback: z.string().trim().max(2000).default('') }))
+  .handler(async ({ data, context: { supabase } }) => {
+    const { error } = await supabase.from('workout_logs').insert(data);
+    if (error) throw new Error('Only your coach can record workouts.');
     return { ok: true };
   });
-export const completeWorkout = createServerFn({ method: 'POST' })
+export const updateWorkout = createServerFn({ method: 'POST' })
   .middleware([requireSupabaseAuth])
-  .inputValidator(z.object({ id: z.string().uuid(), completed: z.boolean() }))
-  .handler(async ({ data, context: { supabase, userId } }) => {
-    const { data: rows, error } = await supabase.from('workout_logs').update({ completed: data.completed }).eq('id', data.id).eq('user_id', userId).select('id');
+  .inputValidator(z.object({ id: z.string().uuid(), completed: z.boolean(), feedback: z.string().trim().max(2000) }))
+  .handler(async ({ data, context: { supabase } }) => {
+    const { data: rows, error } = await supabase.from('workout_logs').update({ completed: data.completed, feedback: data.feedback }).eq('id', data.id).select('id');
     if (error || !rows?.length) throw new Error('Unable to update this workout.');
     return { ok: true };
   });
