@@ -5,8 +5,8 @@ export const services: readonly { id: 'corporate' | 'home' | 'couples'; name: st
     { name: 'Apex Exclusive Package', price: '$800', features: ['2x weekly on-site sessions', '4-week fitness plan', 'Custom nutrition plan', 'Online consultation', 'Bloodwork review'] },
   ] },
   { id: 'home', name: 'Home Personal Training', short: 'Your space. Your pace.', description: 'Dedicated coaching at home or in your compound, with workouts built around your schedule and goals.', cadence: 'Personal coaching · at your home', icon: 'home', packages: [
-    { name: 'Home Starter Program', features: ['1x weekly home training session', '4-week fitness plan', 'Custom nutrition plan'] },
-    { name: 'Home Exclusive Package', features: ['2x weekly home training sessions', 'Custom workout plan', 'Online consultation', 'Bloodwork review'] },
+    { name: 'Home Starter Program', price: '$300', features: ['1x weekly home training session', '4-week fitness plan', 'Custom nutrition plan'] },
+    { name: 'Home Exclusive Package', price: '$800', features: ['2x weekly home training sessions', 'Custom workout plan', 'Online consultation', 'Bloodwork review'] },
   ] },
   { id: 'couples', name: 'Couples Training', short: 'Better together.', description: 'Train side by side with joint sessions, shared goals and a coach who brings out the best in both of you.', cadence: 'Joint sessions · built for two', icon: 'users', packages: [
     { name: 'Couples Starter Program', price: '$500', features: ['1x weekly training session', 'Kegel exercises', 'Bedroom performance', 'Joint workout sessions', 'Shared nutrition plans'] },

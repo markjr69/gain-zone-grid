@@ -15,7 +15,7 @@ describe('fitness calculations', () => {
 describe('agency session rules', () => {
   it('Apex Starter costs $400 with one weekly session', () => { expect(services[0].packages[0].price).toBe('$400'); expect(services[0].packages[0].features).toContain('1x weekly on-site session'); });
   it('Apex Exclusive costs $800 with two weekly sessions', () => { expect(services[0].packages[1].name).toBe('Apex Exclusive Package'); expect(services[0].packages[1].price).toBe('$800'); });
-  it('home starter includes one weekly session', () => expect(services[1].packages[0].features).toContain('1x weekly home training session'));
+  it('home packages cost $300 and $800', () => { expect(services[1].packages[0].price).toBe('$300'); expect(services[1].packages[1].price).toBe('$800'); expect(services[1].packages[0].features).toContain('1x weekly home training session'); });
   it('couples prices are $500 and $1000', () => { expect(services[2].packages[0].price).toBe('$500'); expect(services[2].packages[1].price).toBe('$1000'); });
 });
 describe('private trainee progress', () => {
