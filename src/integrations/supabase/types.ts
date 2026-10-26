@@ -165,6 +165,7 @@ export type Database = {
           completed: boolean
           created_at: string
           duration_minutes: number
+          feedback: string
           id: string
           title: string
           user_id: string
@@ -174,6 +175,7 @@ export type Database = {
           completed?: boolean
           created_at?: string
           duration_minutes: number
+          feedback?: string
           id?: string
           title: string
           user_id?: string
@@ -183,6 +185,7 @@ export type Database = {
           completed?: boolean
           created_at?: string
           duration_minutes?: number
+          feedback?: string
           id?: string
           title?: string
           user_id?: string
@@ -196,9 +199,10 @@ export type Database = {
     }
     Functions: {
       can_view_trainee: { Args: { target: string }; Returns: boolean }
+      is_coach: { Args: never; Returns: boolean }
     }
     Enums: {
-      app_role: "trainee" | "hr"
+      app_role: "trainee" | "hr" | "coach"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -326,7 +330,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["trainee", "hr"],
+      app_role: ["trainee", "hr", "coach"],
     },
   },
 } as const
