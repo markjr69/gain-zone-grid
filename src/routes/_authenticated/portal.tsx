@@ -3,7 +3,7 @@ import { queryOptions, useSuspenseQuery, useQueryClient } from '@tanstack/react-
 import { useServerFn } from '@tanstack/react-start';
 import { useState, type FormEvent } from 'react';
 import { Activity, Check, Dumbbell, Flame, LogOut, Users } from 'lucide-react';
-import { getPortal, saveWorkout, completeWorkout, saveFitnessEntry, saveProfile } from '@/lib/portal.functions';
+import { getPortal, saveWorkout, updateWorkout, saveFitnessEntry, saveProfile } from '@/lib/portal.functions';
 import { traineeProgress, weeklyProgress } from '@/lib/portal-metrics';
 import { calculateBMI } from '@/lib/fitness';
 import { pageHead } from '@/lib/agency';
@@ -24,10 +24,10 @@ function PortalPage() {
   const queryClient = useQueryClient();
   const navigate = Route.useNavigate();
   const addWorkout = useServerFn(saveWorkout);
-  const updateWorkout = useServerFn(completeWorkout);
+  const editWorkout = useServerFn(updateWorkout);
   const addEntry = useServerFn(saveFitnessEntry);
   const updateProfile = useServerFn(saveProfile);
-  const [view, setView] = useState<'trainee' | 'hr'>('trainee');
+  const [view, setView] = useState<'trainee' | 'hr' | 'coach'>('trainee');
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -47,8 +47,10 @@ function PortalPage() {
   }
   function submitWorkout(e: FormEvent<HTMLFormElement>) {
     e.preventDefault(); const form = e.currentTarget; const f = new FormData(form);
-    void run(async () => { await addWorkout({ data: { title: String(f.get('title')), duration_minutes: Number(f.get('duration')), workout_date: String(f.get('date')), completed: f.get('completed') === 'on' } }); form.reset(); });
+    void run(async () => { await addWorkout({ data: { user_id: String(f.get('client')), title: String(f.get('title')), duration_minutes: Number(f.get('duration')), workout_date: String(f.get('date')), completed: f.get('completed') === 'on', feedback: String(f.get('feedback') ?? '') } }); form.reset(); });
   }
+  const [client, setClient] = useState('');
+  const clientWorkouts = data.workouts.filter(w => w.user_id === client);
   function submitEntry(e: FormEvent<HTMLFormElement>) {
     e.preventDefault(); const f = new FormData(e.currentTarget);
     void run(() => addEntry({ data: { weight_kg: Number(f.get('weight')), height_cm: Number(f.get('height')), calories: Number(f.get('calories')), entry_date: String(f.get('date')) } }));
