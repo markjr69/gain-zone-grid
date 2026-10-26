@@ -13,9 +13,10 @@ describe('fitness calculations', () => {
   it('rejects invalid inputs', () => { expect(calculateBMI(70, 0)).toBeNull(); expect(calculateTDEE(0, 70, 175, 1.55, 'male')).toBeNull(); });
 });
 describe('agency session rules', () => {
-  it('corporate starter includes two weekly on-site sessions', () => expect(services[0].packages[0].features).toContain('2x weekly on-site team sessions'));
-  it('corporate individual includes two weekly on-site sessions', () => expect(services[0].packages[1].features).toContain('2x weekly 1:1 on-site coaching'));
-  it('home starter includes one weekly session', () => expect(services[1].packages[0].features).toContain('1x weekly on-site home training session'));
+  it('Apex Starter costs $400 with one weekly session', () => { expect(services[0].packages[0].price).toBe('$400'); expect(services[0].packages[0].features).toContain('1x weekly on-site session'); });
+  it('Apex Exclusive costs $800 with two weekly sessions', () => { expect(services[0].packages[1].name).toBe('Apex Exclusive Package'); expect(services[0].packages[1].price).toBe('$800'); });
+  it('home starter includes one weekly session', () => expect(services[1].packages[0].features).toContain('1x weekly home training session'));
+  it('couples prices are $500 and $1000', () => { expect(services[2].packages[0].price).toBe('$500'); expect(services[2].packages[1].price).toBe('$1000'); });
 });
 describe('private trainee progress', () => {
   it('counts only the selected trainee workouts', () => assert.deepEqual(traineeProgress('a', [{ user_id: 'a', completed: true, duration_minutes: 30 }, { user_id: 'a', completed: false, duration_minutes: 45 }, { user_id: 'b', completed: true, duration_minutes: 60 }]), { planned: 2, done: 1, minutes: 30, engagement: 50 }));
