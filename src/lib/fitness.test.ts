@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import { strict as assert } from 'node:assert';
 import { calculateBMI, calculateTDEE } from './fitness';
 import { services } from './agency';
-import { traineeProgress, weeklyProgress } from './portal-metrics';
+import { traineeProgress, weeklyProgress, weeklyTarget, monthlySessions } from './portal-metrics';
 import { calendarDateSchema } from './portal-schema';
 const expect = (value: any) => ({ toBe: (expected: any) => assert.equal(value, expected), toEqual: (expected: any) => assert.deepEqual(value, expected), toBeNull: () => assert.equal(value, null), toContain: (expected: any) => assert.ok(value.includes(expected)), toBeCloseTo: (expected: number, digits: number) => assert.ok(Math.abs(value - expected) < 10 ** -digits) });
 
@@ -17,6 +17,14 @@ describe('agency session rules', () => {
   it('Apex Exclusive costs $800 with two weekly sessions', () => { expect(services[0].packages[1].name).toBe('Apex Exclusive Package'); expect(services[0].packages[1].price).toBe('$800'); });
   it('home packages cost $300 and $800', () => { expect(services[1].packages[0].price).toBe('$300'); expect(services[1].packages[1].price).toBe('$800'); expect(services[1].packages[0].features).toContain('1x weekly home training session'); });
   it('couples prices are $500 and $1000', () => { expect(services[2].packages[0].price).toBe('$500'); expect(services[2].packages[1].price).toBe('$1000'); });
+  it('3D body scanning is exclusive-package only', () => {
+    assert.ok(services[0].packages[1].features.includes('3D body scanning'));
+    assert.ok(services[1].packages[1].features.includes('3D body scanning'));
+    assert.ok(services[2].packages[1].features.includes('3D body scanning'));
+    assert.ok(!services[0].packages[0].features.includes('3D body scanning'));
+    assert.ok(!services[1].packages[0].features.includes('3D body scanning'));
+    assert.ok(!services[2].packages[0].features.includes('3D body scanning'));
+  });
 });
 describe('private trainee progress', () => {
   it('counts only the selected trainee workouts', () => assert.deepEqual(traineeProgress('a', [{ user_id: 'a', completed: true, duration_minutes: 30 }, { user_id: 'a', completed: false, duration_minutes: 45 }, { user_id: 'b', completed: true, duration_minutes: 60 }]), { planned: 2, done: 1, minutes: 30, engagement: 50 }));
@@ -31,6 +39,18 @@ describe('weekly progress and journal dates', () => {
       { user_id: 'b', completed: true, duration_minutes: 60, workout_date: '2026-10-25' },
     ];
     assert.deepEqual(weeklyProgress('a', workouts, '2026-10-25'), { planned: 2, done: 1, minutes: 30, engagement: 50 });
+  });
+  it('weekly target is 2 workouts', () => {
+    const workouts = [{ user_id: 'a', completed: true, duration_minutes: 30, workout_date: '2026-10-25' }];
+    assert.deepEqual(weeklyTarget('a', workouts, '2026-10-25'), { done: 1, target: 2 });
+  });
+  it('monthly sessions only include the current month for the trainee', () => {
+    const workouts = [
+      { user_id: 'a', workout_date: '2026-10-25', title: 'This month' },
+      { user_id: 'a', workout_date: '2026-09-30', title: 'Last month' },
+      { user_id: 'b', workout_date: '2026-10-20', title: 'Other trainee' },
+    ];
+    assert.deepEqual(monthlySessions('a', workouts, '2026-10-27').map(w => w.title), ['This month']);
   });
   it('rejects impossible dates while accepting leap days', () => {
     assert.equal(calendarDateSchema.safeParse('2026-02-30').success, false);

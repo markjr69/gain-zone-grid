@@ -1,6 +1,6 @@
 import { createServerFn } from '@tanstack/react-start';
 import { requireSupabaseAuth } from '@/integrations/supabase/auth-middleware';
-import { fitnessEntrySchema, workoutSchema } from './portal-schema';
+import { fitnessEntrySchema } from './portal-schema';
 import { z } from 'zod';
 
 export const getPortal = createServerFn({ method: 'POST' })
@@ -18,26 +18,9 @@ export const getPortal = createServerFn({ method: 'POST' })
       if (result.error) throw new Error('Unable to load your portal. Please try again.');
     }
     const roleList = (roles.data ?? []).map(r => String(r.role));
-    return { userId, profiles: profiles.data ?? [], workouts: workouts.data ?? [], entries: entries.data ?? [], isHR: roleList.includes('hr'), isCoach: roleList.includes('coach'), members: members.data ?? [], companies: companies.data ?? [] };
+    return { userId, profiles: profiles.data ?? [], workouts: workouts.data ?? [], entries: entries.data ?? [], isHR: roleList.includes('hr'), members: members.data ?? [], companies: companies.data ?? [] };
   });
 
-// Coach-only: row-level policies reject writes from non-coach accounts.
-export const saveWorkout = createServerFn({ method: 'POST' })
-  .middleware([requireSupabaseAuth])
-  .inputValidator(workoutSchema.extend({ user_id: z.string().uuid(), feedback: z.string().trim().max(2000).default('') }))
-  .handler(async ({ data, context: { supabase } }) => {
-    const { error } = await supabase.from('workout_logs').insert(data);
-    if (error) throw new Error('Only your coach can record workouts.');
-    return { ok: true };
-  });
-export const updateWorkout = createServerFn({ method: 'POST' })
-  .middleware([requireSupabaseAuth])
-  .inputValidator(z.object({ id: z.string().uuid(), completed: z.boolean(), feedback: z.string().trim().max(2000) }))
-  .handler(async ({ data, context: { supabase } }) => {
-    const { data: rows, error } = await supabase.from('workout_logs').update({ completed: data.completed, feedback: data.feedback }).eq('id', data.id).select('id');
-    if (error || !rows?.length) throw new Error('Unable to update this workout.');
-    return { ok: true };
-  });
 export const saveFitnessEntry = createServerFn({ method: 'POST' })
   .middleware([requireSupabaseAuth])
   .inputValidator(fitnessEntrySchema)
