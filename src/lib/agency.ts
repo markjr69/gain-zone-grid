@@ -2,15 +2,15 @@ type Pkg = { name: string; price?: string; features: readonly string[] };
 export const services: readonly { id: 'corporate' | 'home' | 'couples'; name: string; short: string; description: string; cadence: string; icon: 'building' | 'home' | 'users'; packages: readonly Pkg[] }[] = [
   { id: 'corporate', name: 'Corporate Training', short: 'Stronger teams.', description: 'On-site training that fits the working day. Build energy, team connection and lasting healthy habits.', cadence: 'On-site sessions · at your office', icon: 'building', packages: [
     { name: 'Apex Starter Program', price: '$400', features: ['1x weekly on-site session', '4-week fitness plan', 'Custom nutrition plan', 'Online consultation'] },
-    { name: 'Apex Exclusive Package', price: '$800', features: ['2x weekly on-site sessions', '4-week fitness plan', 'Custom nutrition plan', 'Online consultation', 'Bloodwork review'] },
+    { name: 'Apex Exclusive Package', price: '$800', features: ['2x weekly on-site sessions', '4-week fitness plan', 'Custom nutrition plan', 'Online consultation', 'Bloodwork review', '3D body scanning'] },
   ] },
   { id: 'home', name: 'Home Personal Training', short: 'Your space. Your pace.', description: 'Dedicated coaching at home or in your compound, with workouts built around your schedule and goals.', cadence: 'Personal coaching · at your home', icon: 'home', packages: [
     { name: 'Home Starter Program', price: '$300', features: ['1x weekly home training session', '4-week fitness plan', 'Custom nutrition plan'] },
-    { name: 'Home Exclusive Package', price: '$800', features: ['2x weekly home training sessions', 'Custom workout plan', 'Online consultation', 'Bloodwork review'] },
+    { name: 'Home Exclusive Package', price: '$800', features: ['2x weekly home training sessions', 'Custom workout plan', 'Online consultation', 'Bloodwork review', '3D body scanning'] },
   ] },
   { id: 'couples', name: 'Couples Training', short: 'Better together.', description: 'Train side by side with joint sessions, shared goals and a coach who brings out the best in both of you.', cadence: 'Joint sessions · built for two', icon: 'users', packages: [
     { name: 'Couples Starter Program', price: '$500', features: ['1x weekly training session', 'Kegel exercises', 'Bedroom performance', 'Joint workout sessions', 'Shared nutrition plans'] },
-    { name: 'Couples Exclusive Package', price: '$1000', features: ['2x weekly training sessions', 'Kegel exercises', 'Joint workout sessions', 'Bi-weekly training', 'Better bedroom performance'] },
+    { name: 'Couples Exclusive Package', price: '$1000', features: ['2x weekly training sessions', 'Kegel exercises', 'Joint workout sessions', 'Bi-weekly training', 'Better bedroom performance', '3D body scanning'] },
   ] },
 ];
 
@@ -26,6 +26,13 @@ export const steps = [
   { title: 'Get your tailored plan', text: 'Choose corporate, home or couples coaching. We shape your workouts and nutrition around you.' },
   { title: 'We come to you', text: 'Your trainer meets you at your office, home or compound. No gym commute. No equipment needed.' },
   { title: 'Build momentum', text: 'Track your goals, check in with your coach and adapt your plan as you progress.' },
+] as const;
+
+export const reviews = [
+  { name: 'Daniella K.', role: 'HR Manager, Kampala', rating: 5, text: 'Our team now looks forward to session days. Office energy has completely changed — participation is up and so is morale.' },
+  { name: 'Brian O.', role: 'Home training client', rating: 5, text: 'Training at home with no equipment and no gym commute. The custom nutrition plan fit straight into my routine.' },
+  { name: 'Sarah & Tom', role: 'Couples training', rating: 5, text: 'We started training together and it has become our weekly highlight. Patient, personal coaching that works for both of us.' },
+  { name: 'Michael W.', role: 'Corporate pilot participant', rating: 5, text: 'The free pilot session sold the whole office. Professional, high energy, and it happens right at our workplace.' },
 ] as const;
 
 export function pageHead(title: string, description: string) {

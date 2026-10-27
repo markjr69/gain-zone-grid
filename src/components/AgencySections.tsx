@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router';
-import { Activity, ArrowRight, Building2, Dumbbell, Heart, Home, MapPin, Target, Users } from 'lucide-react';
+import { Activity, ArrowRight, Building2, Dumbbell, Heart, Home, MapPin, Star, Target, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { goals, services, steps } from '@/lib/agency';
+import { goals, reviews, services, steps } from '@/lib/agency';
 
 const icons = { building: Building2, home: Home, users: Users, target: Target, dumbbell: Dumbbell, heart: Heart, activity: Activity };
 export function SectionTitle({ eyebrow, title, accent }: { eyebrow: string; title: string; accent?: string }) {
@@ -18,4 +18,7 @@ export function StepsGrid() {
 }
 export function CallCTA() {
   return <section className="border-y border-border bg-primary text-primary-foreground"><div className="mx-auto flex max-w-7xl flex-col justify-between gap-7 px-4 py-14 sm:px-6 lg:flex-row lg:items-center"><div><p className="font-mono text-xs uppercase">Your next move</p><h2 className="mt-3 text-4xl sm:text-5xl">Make room for a stronger you.</h2></div><Button asChild className="h-12 shrink-0 rounded-none bg-background px-6 text-foreground hover:bg-surface"><Link to="/contact" search={{ type: 'strategy' }}>Schedule a Free Call <ArrowRight /></Link></Button></div></section>;
+}
+export function ReviewsGrid() {
+  return <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{reviews.map(r => <figure key={r.name} className="flex flex-col border border-border bg-background p-6"><div className="flex gap-1 text-primary" aria-label={`${r.rating} out of 5 stars`}>{Array.from({ length: r.rating }).map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}</div><blockquote className="mt-5 flex-1 text-sm leading-relaxed text-muted-foreground">“{r.text}”</blockquote><figcaption className="mt-6 border-t border-border pt-4"><p className="font-semibold">{r.name}</p><p className="mt-1 text-xs text-muted-foreground">{r.role}</p></figcaption></figure>)}</div>;
 }

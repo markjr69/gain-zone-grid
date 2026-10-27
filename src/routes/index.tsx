@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router';
 import { ArrowRight, MapPin, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { pageHead } from '@/lib/agency';
-import { ServicesGrid, GoalsGrid, StepsGrid, SectionTitle, CallCTA } from '@/components/AgencySections';
+import { ServicesGrid, GoalsGrid, StepsGrid, ReviewsGrid, SectionTitle, CallCTA } from '@/components/AgencySections';
 import hero from '@/assets/apex-training.jpg';
 export const Route = createFileRoute('/')({ head: () => pageHead('Apex Mobile Trainers — On-Site Fitness in Kampala', 'We bring certified fitness trainers directly to your office, home or compound. Personalized training, nutrition and corporate wellness in Kampala.'), component: Index });
 function Index() {
